@@ -33,8 +33,14 @@ pyinstaller.exe .\main.spec --onefile --noconsole
 
 #### IMAGES:
 
-;; <img src="/images/home.png" width=340px /><img src="/images/game2.png" width=340px />
-;; <img src="/images/scoreboard2.png" width=340px /><img src="/images/paused.png" width=340px />
-;; <img src="/images/settings.png" width=340px /><img src="/images/ships.png" width=340px />
-;; <img src="/images/controls1.png" width=340px /><img src="/images/controls2.png" width=340px />
-;; <img src="/images/controls3.png" width=340px /><img src="/images/controls4.png" width=340px />
+<img src="/images/home.png" width=340px /><img src="/images/game2.png" width=340px />
+<img src="/images/scoreboard2.png" width=340px /><img src="/images/paused.png" width=340px />
+<img src="/images/settings1.png" width=340px /><img src="/images/ships.png" width=340px />
+<img src="/images/settings2.png" width=340px /><img src="/images/ships.png" width=340px />
+<img src="/images/settings3.png" width=340px /><img src="/images/ships.png" width=340px />
+<img src="/images/settings4.png" width=340px /><img src="/images/ships.png" width=340px />
+<img src="/images/game_desory.png" width=340px /><img src="/images/controls2.png" width=340px />
+<img src="/images/game.png" width=340px /><img src="/images/controls4.png" width=340px />
+<img src="/images/volume.png" width=340px /><img src="/images/controls4.png" width=340px />
+<img src="/images/paused.png" width=340px /><img src="/images/controls4.png" width=340px />
+<img src="/images/ships_info.png" width=340px /><img src="/images/controls4.png" width=340px />
