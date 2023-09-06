@@ -152,7 +152,7 @@ def game(isMouse=False):
 
         if len(enemies) == 0:
             player.set_level()
-            wave_length += 4
+            wave_length += 7
 
             for i in range(wave_length if player.get_level() < 10 else 1):
                 enemies.append(Enemy(
