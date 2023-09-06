@@ -3,7 +3,8 @@ import sys
 import time
 import random
 
-from models.ship import Player, Enemy
+from models.ship import Player, Enemy, Obstacle
+# from models.meteor import Obstacle
 from models.explosion import Explosion, explosion_group
 from models.controls import audio_cfg, display_cfg
 from models.scores import scores
@@ -35,6 +36,11 @@ def game(isMouse=False):
     enemies = []
     wave_length = 0
     enemy_vel = 1
+
+    # obstacle
+    obstacles = []
+    wave_len = 0
+    obs_vel = 1
 
     player = Player(config.center_x, 585, mouse_movement=isMouse)
     if isMouse == True:
@@ -155,6 +161,24 @@ def game(isMouse=False):
                     random.choice(['easy', 'medium', 'hard']) if player.get_level() < 10 else 'boss')
                 )
 
+            for i in range(wave_length if player.get_level() < 10 else 1):
+                enemies.append(Obstacle(
+                    random.randrange(50, config.WIDTH - 100),
+                    random.randrange(-1200, -100),
+                    random.choice(['easyObs', 'mediumObs']) if player.get_level() < 10 else 'hardObs')
+                )
+
+        # if len(obstacles) == 0:
+        #     player.set_level()
+        #     wave_len += 3
+
+        #     for i in range(wave_len if player.get_level() < 10 else 1):
+        #         obstacles.append(Obstacle(
+        #             random.randrange(50),
+        #             random.randrange(-1200, -100),
+        #             random.choice(['easyObs', 'mediumObs', 'hardObs']) if player.get_level() < 10 else 'hardObs'
+        #         ))
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -227,6 +251,50 @@ def game(isMouse=False):
                 enemies.remove(enemy)
 
         player.move_lasers(-laser_vel, enemies)
+
+        # Obstacle
+        for obstacle in obstacles[:]:
+            obstacle.move(obs_vel)
+            # obstacle.move_lasers(laser_vel, player)
+
+            # if random.randrange(0, 2 * config.FPS) == 1:
+            #     enemy.shoot()
+
+            if collide(obstacle, player):
+                player.SCORE += 25
+                player.KILLS += 1
+
+                player.health -= 10
+                crash = Explosion(enemy.x, enemy.y)
+                explosion_group.add(crash)
+                enemies.remove(enemy)
+
+                # if enemy.ship_type == 'boss':
+                #     if enemy.boss_max_health - 5 <= 0:
+                #         # note: this is not seen as game is paused as soon as boss health reaches zero
+                #         # should be fixed in future with a short delay in pausing
+                #         boss_crash = Explosion(player.x, player.y, size=100)
+                #         explosion_group.add(boss_crash)
+
+                #         enemies.remove(enemy)
+                #         enemy.boss_max_health = 100
+                #         player.health -= 100
+                #     else:
+                #         enemy.boss_max_health -= 5
+                #         player.health -= 100
+                #         # player death explosion
+                #         crash = Explosion(player.x, player.y)
+                #         explosion_group.add(crash)
+                # else:
+                #     player.health -= 10
+                #     crash = Explosion(enemy.x, enemy.y)
+                #     explosion_group.add(crash)
+                #     enemies.remove(enemy)
+            elif obstacle.y + obstacle.get_height()/2 > config.HEIGHT:
+                lives -= 1
+                enemies.remove(obstacle)
+
+        player.move_lasers(-laser_vel, obstacles)
 
 
 def paused(player, isMouse):

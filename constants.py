@@ -40,6 +40,12 @@ class Image:
     HARD_SPACE_SHIP = Assets.image.load(Path.GRAPHICS_PATH, 'hard.png')
     BOSS_SHIP = Assets.image.load(Path.GRAPHICS_PATH, 'boss.png')
 
+    # Obstacle
+    EASY_OBSTACLE = Assets.image.load(Path.GRAPHICS_PATH, 'asteroid_easy.png')
+    MEDIUM_OBSTACLE = Assets.image.load(Path.GRAPHICS_PATH, 'asteroid_medium.png')
+    HARD_OBSTACLE = Assets.image.load(Path.GRAPHICS_PATH, 'meteor.png')
+    OBSTACLE = Assets.image.load(Path.GRAPHICS_PATH, 'meteor_edit.png')
+
     UFO_SPACE_SHIP = Assets.image.scale(Path.GRAPHICS_PATH, 'ufo.png', 1/7)
 
     # Load Player
@@ -153,6 +159,7 @@ class Colors:
 
 class Text:
     SHIPS = 'SHIPS'
+    METEORS = 'OBSTACLE'
     SETTINGS = 'SETTINGS'
     CONTROLS = 'CONTROLS'
     SCOREBOARD = 'SCOREBOARD'

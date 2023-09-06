@@ -7,6 +7,7 @@ from screens.game import game
 from screens.controls import controls
 from screens.score_board import score_board
 from screens.ships import ships
+from screens.meteors import meteors
 from screens.settings import settings
 from screens.background import slow_bg_obj
 from models.button import Button
@@ -38,6 +39,7 @@ def main():
     keyboard_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE, "KEYBOARD")
     control_btn = IconButton(Image.CONTROL_IMAGE, Text.CONTROLS)
     ships_btn = IconButton(Image.SHIPS_IMAGE, Text.SHIPS)
+    meteors_btn = IconButton(Image.OBSTACLE, Text.METEORS)
     trophy_btn = IconButton(Image.TROPHY_IMAGE, Text.SCOREBOARD)
     settings_btn = IconButton(Image.TOOLBOX_IMAGE, Text.SETTINGS)
 
@@ -74,6 +76,9 @@ def main():
 
         # Ships Page
         ships_btn.draw((config.starting_x + 65, 165), True, True)
+
+        # Obstacle
+        meteors_btn.draw((config.starting_x + 65, 295), True, True)
 
         audio_cfg.display_volume()
 
@@ -118,6 +123,8 @@ def main():
                         score_board()
                     if ships_btn.isOver():
                         ships()
+                    if meteors_btn.isOver():
+                        meteors()
                     if settings_btn.isOver():
                         settings()
                     if exit_btn.isOver():
@@ -154,6 +161,11 @@ def main():
                     ships_btn.outline = True
                 else:
                     ships_btn.outline = False
+
+                if meteors_btn.isOver():
+                    meteors_btn.outline = True
+                else:
+                    meteors_btn.outline = False
 
                 if exit_btn.isOver():
                     exit_btn.outline = True
