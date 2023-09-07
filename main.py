@@ -4,6 +4,7 @@ import argparse
 
 from utils.assets import Assets
 from screens.game import game
+from screens.prologue import prologoue
 from screens.controls import controls
 from screens.score_board import score_board
 from screens.ships import ships
@@ -35,8 +36,9 @@ def main():
 
     audio_cfg.play_music(Path.MENU_MUSIC_PATH)
 
-    mouse_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE, "MOUSE")
-    keyboard_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE, "KEYBOARD")
+    scene_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE, "MULAI")
+    # mouse_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE, "MOUSE")
+    # keyboard_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE, "MULAI")
     control_btn = IconButton(Image.CONTROL_IMAGE, Text.CONTROLS)
     ships_btn = IconButton(Image.SHIPS_IMAGE, Text.SHIPS)
     meteors_btn = IconButton(Image.OBSTACLE, Text.METEORS)
@@ -57,10 +59,12 @@ def main():
         Assets.image.draw(Image.PLAYER_SPACE_SHIP, (config.center_x-46, 575))
         Assets.image.draw(Image.PLAYER_LASER, (config.center_x, 490), True)
 
-        mouse_btn.draw(
-            (config.center_x - 210, config.center_y + 42), (195, 66))
-        keyboard_btn.draw(
-            (config.center_x + 15, config.center_y + 42), (195, 66))
+        # mouse_btn.draw(
+        #     (config.center_x - 210, config.center_y + 42), (195, 66))
+        # keyboard_btn.draw(
+        #     (config.center_x + 15, config.center_y + 42), (195, 66))
+        scene_btn.draw(
+            (config.center_x - 100, config.center_y + 45), (195, 66))
 
         Assets.text.draw('Start Game', title_font, Colors.WHITE,
                          (config.center_x, config.center_y-10), True, True)
@@ -113,10 +117,12 @@ def main():
             # Mouse click events
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    if mouse_btn.isOver():
-                        game(True)
-                    if keyboard_btn.isOver():
-                        game()
+                    # if mouse_btn.isOver():
+                    #     game(True)
+                    if scene_btn.isOver():
+                        prologoue()
+                    # if keyboard_btn.isOver():
+                    #     game()
                     if control_btn.isOver():
                         controls()
                     if trophy_btn.isOver():
@@ -132,15 +138,20 @@ def main():
 
             # Mouse hover events
             if event.type == pygame.MOUSEMOTION:
-                if mouse_btn.isOver():
-                    mouse_btn.outline = True
-                else:
-                    mouse_btn.outline = False
+                # if mouse_btn.isOver():
+                #     mouse_btn.outline = True
+                # else:
+                #     mouse_btn.outline = False
 
-                if keyboard_btn.isOver():
-                    keyboard_btn.outline = True
+                if scene_btn.isOver():
+                    scene_btn.outline = True
                 else:
-                    keyboard_btn.outline = False
+                    scene_btn.outline = False                
+
+                # if keyboard_btn.isOver():
+                #     keyboard_btn.outline = True
+                # else:
+                #     keyboard_btn.outline = False
 
                 if control_btn.isOver():
                     control_btn.outline = True

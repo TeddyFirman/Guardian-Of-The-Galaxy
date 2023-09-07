@@ -356,3 +356,5 @@ def paused(player, isMouse):
 def unpause():
     global pause
     pause = False
+    from main import main
+    main()

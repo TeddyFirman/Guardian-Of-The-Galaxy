@@ -21,6 +21,7 @@ class Path:
     # load music
     GAME_MUSIC_PATH = resource_path(os.path.join(SOUND_PATH, 'ingame.wav'))
     MENU_MUSIC_PATH = resource_path(os.path.join(SOUND_PATH, 'menu.wav'))
+    PROLOGUE_MUSIC_PATH = resource_path(os.path.join(SOUND_PATH, 'prologue.wav'))
 
 
 class Font:
@@ -45,6 +46,10 @@ class Image:
     MEDIUM_OBSTACLE = Assets.image.load(Path.GRAPHICS_PATH, 'asteroid_medium.png')
     HARD_OBSTACLE = Assets.image.load(Path.GRAPHICS_PATH, 'meteor.png')
     OBSTACLE = Assets.image.load(Path.GRAPHICS_PATH, 'meteor_edit.png')
+
+    # Prologue
+    STARLORD = Assets.image.load(Path.GRAPHICS_PATH, 'starlord.png')
+    GOTG = Assets.image.load(Path.GRAPHICS_PATH, 'gotg.png')
 
     UFO_SPACE_SHIP = Assets.image.scale(Path.GRAPHICS_PATH, 'ufo.png', 1/7)
 
@@ -159,6 +164,7 @@ class Colors:
 
 class Text:
     SHIPS = 'SHIPS'
+    PROLOGUE = 'PROLOGUE'
     METEORS = 'OBSTACLE'
     SETTINGS = 'SETTINGS'
     CONTROLS = 'CONTROLS'
