@@ -250,6 +250,115 @@ class Player(Ship):
                          x_offset/2, self.y + y_offset/2 + 10, int(self.ship_img.get_width()), 10))
         pygame.draw.rect(config.CANVAS, Colors.GREEN, (config.starting_x + self.x - x_offset/2, self.y +
                          y_offset/2 + 10, int(self.ship_img.get_width() * (self.health/self.max_health)), 10))
+        
+class Player2(Ship):
+    def __init__(self, x, y, health=100, mouse_movement=False):
+        super().__init__(x, y, health)
+        self.ship_img = Image.PLAYER2_SPACE_SHIP
+        self.laser_img = Image.PLAYER_LASER
+        self.mask = pygame.mask.from_surface(self.ship_img)
+        self.max_health = health
+        self.mouse_movement = mouse_movement
+        self.run = True
+        self.vel = 5
+
+    def move_with_keyboard(self):
+        keys = pygame.key.get_pressed()
+        action = {'LEFT': keys[pygame.K_LEFT] or keys[pygame.K_a],
+                  'RIGHT': keys[pygame.K_RIGHT] or keys[pygame.K_d],
+                  'UP': keys[pygame.K_UP] or keys[pygame.K_w],
+                  'DOWN': keys[pygame.K_DOWN] or keys[pygame.K_s],
+                  'SHOOT': keys[pygame.K_SPACE],
+                  'QUIT': keys[pygame.K_BACKSPACE]}
+
+        # Return to main page
+        if action['QUIT']:
+            audio_cfg.play_music(Path.MENU_MUSIC_PATH)
+            self.run = False
+        # Left Key
+        if action['LEFT'] and (self.x - self.vel) > self.get_width()/2:
+            self.x -= self.vel
+        # Right Key
+        if action['RIGHT'] and (self.x + self.vel + self.get_width()/2) < config.WIDTH:
+            self.x += self.vel
+        # Up Key
+        if action['UP'] and (self.y - self.vel) > 0:
+            self.y -= self.vel
+        # Down Key
+        if action['DOWN'] and (self.y + self.vel + self.get_height()) < config.HEIGHT:
+            self.y += self.vel
+        # Shoot Laser
+        if action['SHOOT']:
+            self.shoot()
+
+    def move_with_mouse(self):
+        cx, cy = pygame.mouse.get_pos()
+        button = pygame.mouse.get_pressed()
+        keys = pygame.key.get_pressed()
+        # Movement
+        if cx > self.get_width()/2 and cx < config.WIDTH - self.get_width()/2 \
+                and cy > 0 and cy < config.HEIGHT:
+            self.x = cx
+            self.y = cy
+        # Shoot Laser
+        if button[0] or keys[pygame.K_SPACE]:
+            self.shoot()
+        # Return to main page
+        if button[2] or keys[pygame.K_BACKSPACE]:
+            score_obj = {
+                "status": False,
+                "level": self.get_level(),
+                "score": self.get_score(),
+                "kills": self.get_kills(),
+            }
+            scores.append(False, self.get_level(), self.get_score(), self.get_kills())
+            audio_cfg.play_music(Path.MENU_MUSIC_PATH)
+            self.run = False
+
+    def move(self):
+        if(self.mouse_movement):
+            self.move_with_mouse()
+        else:
+            self.move_with_keyboard()
+
+    def move_lasers(self, vel, objs):
+        self.coolDown()
+        for laser in self.lasers:
+            laser.move(vel)
+            if laser.off_screen(config.HEIGHT):
+                self.lasers.remove(laser)
+            else:
+                for obj in objs:
+                    if laser.collision(obj):
+                        if obj.ship_type == 'boss':
+                            if self.boss_max_health - 10 <= 0:
+                                self.SCORE += 1000
+                                self.KILLS += 1
+                                objs.remove(obj)
+                                self.boss_max_health = 100
+                            else:
+                                self.boss_max_health -= 10
+                        else:
+                            self.SCORE += 50
+                            self.KILLS += 1
+                            # enemy ship death explosion
+                            explosion = Explosion(obj.x, obj.y)
+                            explosion_group.add(explosion)
+                            objs.remove(obj)
+
+                        if laser in self.lasers:
+                            self.lasers.remove(laser)
+
+    def draw(self):
+        super().draw()
+        self.healthBar()
+
+    def healthBar(self):
+        x_offset, y_offset = self.ship_img.get_size()
+        pygame.draw.rect(config.CANVAS, Colors.RED, (config.starting_x + self.x -
+                         x_offset/2, self.y + y_offset/2 + 10, int(self.ship_img.get_width()), 10))
+        pygame.draw.rect(config.CANVAS, Colors.GREEN, (config.starting_x + self.x - x_offset/2, self.y +
+                         y_offset/2 + 10, int(self.ship_img.get_width() * (self.health/self.max_health)), 10))
 
 
 class Enemy(Ship):

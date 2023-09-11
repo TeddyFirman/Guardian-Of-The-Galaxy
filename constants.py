@@ -56,6 +56,12 @@ class Image:
     # Load Player
     PLAYER_SPACE_SHIP = Assets.image.load(
         Path.GRAPHICS_PATH, 'retro-spaceship.png')
+    PLAYER_SPACE_SHIP_PRO = Assets.image.load(
+        Path.GRAPHICS_PATH, 'retro-spaceship_prologue.png')
+    PLAYER2_SPACE_SHIP_PRO = Assets.image.load(
+        Path.GRAPHICS_PATH, 'retro-spaceship2ed_pro.png')
+    PLAYER2_SPACE_SHIP = Assets.image.load(
+        Path.GRAPHICS_PATH, 'retro-spaceship2ed.png')
     PLAYER_LASER = Assets.image.load(
         Path.GRAPHICS_PATH, 'pixel_laser_cosmic.png')
 
