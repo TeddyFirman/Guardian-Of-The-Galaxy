@@ -141,6 +141,72 @@ class Meteor:
     def set_level(self):
         self.level += 1
 
+class Heal:
+    def __init__(self, x, y, health=100):
+        self.x = x
+        self.y = y
+        self.health = health
+        self.ship_img = None
+        self.laser_img = None
+        self.lasers = []
+        self.cool_down_counter = 0
+        self.CoolDown = 25
+        # self.boss_max_health = 99
+        # self.SCORE = 0
+        # self.KILLS = 0
+        self.level = 0
+
+    def draw(self):
+        # drawing lasers before the ship so that it doesn't appea
+        # like the lasers appear from above the ship
+        for laser in self.lasers:
+            laser.draw()
+
+        # making ship's coordinates centered in the sprite
+        Assets.image.draw(
+            self.ship_img, (config.starting_x+self.x, self.y), True, True)
+
+    def move_lasers(self, vel, obj):
+        self.coolDown()
+        for laser in self.lasers:
+            laser.move(vel)
+            if laser.off_screen(config.HEIGHT):
+                self.lasers.remove(laser)
+            elif laser.collision(obj):
+                obj.health += 10
+                self.lasers.remove(laser)
+
+    def coolDown(self):
+        if self.cool_down_counter >= self.CoolDown:
+            self.cool_down_counter = 0
+        elif self.cool_down_counter > 0:
+            self.cool_down_counter += 1
+
+    # def shoot(self):
+    #     if self.cool_down_counter == 0:
+    #         Sound.PLAYER_LASER_SOUND.play()
+    #         laser = Laser(self.x, self.y, self.laser_img)
+    #         self.lasers.append(laser)
+    #         self.cool_down_counter = 1
+
+    def get_width(self):
+        return self.ship_img.get_width()
+
+    def get_height(self):
+        return self.ship_img.get_height()
+
+    # def get_score(self):
+    #     return self.SCORE
+
+    # def get_kills(self):
+    #     return self.KILLS
+
+    def get_level(self):
+        return self.level
+
+    def set_level(self):
+        self.level += 1
+
 
 class Player(Ship):
     def __init__(self, x, y, health=100, mouse_movement=False):
@@ -413,6 +479,44 @@ class Obstacle(Meteor):
         super().__init__(x, y, health)
         self.ship_type = ship_type
         self.ship_img, self.laser_img, self.damage = self.TYPE_MODE[self.ship_type]
+        self.mask = pygame.mask.from_surface(self.ship_img)
+
+    def move(self, vel):
+        self.y += vel
+
+    def move_lasers(self, vel, obj):
+        self.coolDown()
+        for laser in self.lasers:
+            laser.move(vel)
+            if laser.off_screen(config.HEIGHT):
+                self.lasers.remove(laser)
+            elif laser.collision(obj):
+                # display collisions if enemy lasers hit the player
+                sm_explosion = Explosion(laser.x, laser.y, size=30)
+                explosion_group.add(sm_explosion)
+                obj.health -= self.damage
+                self.lasers.remove(laser)
+
+    def shoot(self):
+        if self.cool_down_counter == 0 and self.y > 0:
+            # Sound.ENEMY_LASER_SOUND.play()
+            # laser = Laser(self.x, self.y, self.laser_img)
+            # self.lasers.append(laser)
+            self.cool_down_counter = 1
+
+class Repair(Heal):
+    TYPE_MODE = {
+        'easyHeal': (Image.EASY_HEAL, Image.RED_LASER, 10),
+        # 'mediumHeal': (Image.MEDIUM_OBSTACLE, Image.BLUE_LASER, 18),
+        # 'hardObs': (Image.OBSTACLE, Image.GREEN_LASER, 25),
+    }
+
+    ship_type = ''
+
+    def __init__(self, x, y, ship_type, health=100):
+        super().__init__(x, y, health)
+        self.ship_type = ship_type
+        self.ship_img, self.laser_img, self.heal = self.TYPE_MODE[self.ship_type]
         self.mask = pygame.mask.from_surface(self.ship_img)
 
     def move(self, vel):

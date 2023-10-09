@@ -44,6 +44,7 @@ def prologoue():
 
         # mouse_btn.draw(
         #     (config.center_x - 210, config.center_y + 42), (195, 66))
+        
         keyboard_btn.draw(
             (config.center_x - 210, config.center_y + 192), (205, 66))
         Assets.image.draw(Image.PLAYER_SPACE_SHIP_PRO,
@@ -85,6 +86,7 @@ def prologoue():
                 if event.button == 1:
                     if go_back_btn.isOver():
                         run = False
+                        audio_cfg.play_music(Path.MENU_MUSIC_PATH)
                     # if mouse_btn.isOver():
                     #     game(True)
                     if keyboard_btn.isOver():
@@ -98,6 +100,7 @@ def prologoue():
                     go_back_btn.outline = True
                 else:
                     go_back_btn.outline = False
+                    
 
                 # if mouse_btn.isOver():
                 #     mouse_btn.outline = True

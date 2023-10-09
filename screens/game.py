@@ -3,7 +3,7 @@ import sys
 import time
 import random
 
-from models.ship import Player, Enemy, Obstacle, Player2
+from models.ship import Player, Enemy, Obstacle, Player2, Repair
 # from models.meteor import Obstacle
 from models.explosion import Explosion, explosion_group
 from models.controls import audio_cfg, display_cfg
@@ -39,8 +39,13 @@ def game(isMouse=False):
 
     # obstacle
     obstacles = []
-    wave_len = 0
+    wave_length_obs = 0
     obs_vel = 1
+
+    # heal
+    heals = []
+    wave_length_heal= 0
+    heal_vel = 1
 
     player = Player(config.center_x, 585, mouse_movement=isMouse)
     if isMouse == True:
@@ -150,9 +155,11 @@ def game(isMouse=False):
             time.sleep(3)
             player.run = False
 
-        if len(enemies) == 0:
+        if len(enemies + heals) == 0:
             player.set_level()
-            wave_length += 7
+            wave_length += 4
+            wave_length_obs += 3
+            wave_length_heal += 1
 
             for i in range(wave_length if player.get_level() < 10 else 1):
                 enemies.append(Enemy(
@@ -161,12 +168,19 @@ def game(isMouse=False):
                     random.choice(['easy', 'medium', 'hard']) if player.get_level() < 10 else 'boss')
                 )
 
-            for i in range(wave_length if player.get_level() < 10 else 1):
+            for i in range(wave_length_obs if player.get_level() < 10 else 1):
                 enemies.append(Obstacle(
                     random.randrange(50, config.WIDTH - 100),
                     random.randrange(-1200, -100),
                     random.choice(['easyObs', 'mediumObs']) if player.get_level() < 10 else 'hardObs')
                 )
+
+            # for i in range(wave_length_heal if player.get_level() < 10 else 2):
+            #     heals.append(Repair(
+            #         random.randrange(50, config.WIDTH - 100),
+            #         random.randrange(-1200, -100),
+            #         random.choice(['easyHeal']) if player.get_level() < 10 else 'easyHeal')
+            #     )
 
         # if len(obstacles) == 0:
         #     player.set_level()
@@ -296,6 +310,50 @@ def game(isMouse=False):
 
         player.move_lasers(-laser_vel, obstacles)
 
+        # # Heal
+        # for heal in heals[:]:
+        #     heal.move(heal_vel)
+        #     # obstacle.move_lasers(laser_vel, player)
+
+        #     # if random.randrange(0, 2 * config.FPS) == 1:
+        #     #     enemy.shoot()
+
+        #     if collide(heals, player):
+        #         # player.SCORE += 25
+        #         # player.KILLS += 1
+
+        #         player.health += 10
+        #         # crash = Explosion(heal.x, heal.y)
+        #         # explosion_group.add(crash)
+        #         heals.remove(heal)
+
+        #         # if enemy.ship_type == 'boss':
+        #         #     if enemy.boss_max_health - 5 <= 0:
+        #         #         # note: this is not seen as game is paused as soon as boss health reaches zero
+        #         #         # should be fixed in future with a short delay in pausing
+        #         #         boss_crash = Explosion(player.x, player.y, size=100)
+        #         #         explosion_group.add(boss_crash)
+
+        #         #         enemies.remove(enemy)
+        #         #         enemy.boss_max_health = 100
+        #         #         player.health -= 100
+        #         #     else:
+        #         #         enemy.boss_max_health -= 5
+        #         #         player.health -= 100
+        #         #         # player death explosion
+        #         #         crash = Explosion(player.x, player.y)
+        #         #         explosion_group.add(crash)
+        #         # else:
+        #         #     player.health -= 10
+        #         #     crash = Explosion(enemy.x, enemy.y)
+        #         #     explosion_group.add(crash)
+        #         #     enemies.remove(enemy)
+        #     elif heal.y + heal.get_height()/2 > config.HEIGHT:
+        #         lives += 1
+        #         heals.remove(heal)
+
+        # player.move_lasers(-laser_vel, heals)
+
 def game2(isMouse=False):
     global pause
     lives = 5
@@ -314,8 +372,13 @@ def game2(isMouse=False):
 
     # obstacle
     obstacles = []
-    wave_len = 0
+    wave_len_obs = 0
     obs_vel = 1
+
+    # obstacle
+    heals = []
+    wave_len_heal = 0
+    heal_vel = 1
 
     player2 = Player2(config.center_x, 585, mouse_movement=isMouse)
     if isMouse == True:
@@ -427,7 +490,9 @@ def game2(isMouse=False):
 
         if len(enemies) == 0:
             player2.set_level()
-            wave_length += 7
+            wave_length += 5
+            wave_len_heal += 1
+            wave_len_obs += 3
 
             for i in range(wave_length if player2.get_level() < 10 else 1):
                 enemies.append(Enemy(
@@ -436,12 +501,19 @@ def game2(isMouse=False):
                     random.choice(['easy', 'medium', 'hard']) if player2.get_level() < 10 else 'boss')
                 )
 
-            for i in range(wave_length if player2.get_level() < 10 else 1):
+            for i in range(wave_len_obs if player2.get_level() < 10 else 1):
                 enemies.append(Obstacle(
                     random.randrange(50, config.WIDTH - 100),
                     random.randrange(-1200, -100),
                     random.choice(['easyObs', 'mediumObs']) if player2.get_level() < 10 else 'hardObs')
                 )
+
+            # for i in range(wave_len_heal if player2.get_level() < 10 else 2):
+            #     enemies.append(Repair(
+            #         random.randrange(50, config.WIDTH - 100),
+            #         random.randrange(-1200, -100),
+            #         random.choice(['easyHeal']) if player2.get_level() < 10 else 'easyHeal')
+            #     )
 
         # if len(obstacles) == 0:
         #     player.set_level()
@@ -571,6 +643,50 @@ def game2(isMouse=False):
 
         player2.move_lasers(-laser_vel, obstacles)
 
+        # # Heal
+        # for heal in heals[:]:
+        #     heal.move(heal_vel)
+        #     # obstacle.move_lasers(laser_vel, player)
+
+        #     # if random.randrange(0, 2 * config.FPS) == 1:
+        #     #     enemy.shoot()
+
+        #     if collide(heals, player2):
+        #         # player.SCORE += 25
+        #         # player.KILLS += 1
+
+        #         player2.health += 10
+        #         crash = Explosion(enemy.x, enemy.y)
+        #         explosion_group.add(crash)
+        #         enemies.remove(enemy)
+
+        #         # if enemy.ship_type == 'boss':
+        #         #     if enemy.boss_max_health - 5 <= 0:
+        #         #         # note: this is not seen as game is paused as soon as boss health reaches zero
+        #         #         # should be fixed in future with a short delay in pausing
+        #         #         boss_crash = Explosion(player.x, player.y, size=100)
+        #         #         explosion_group.add(boss_crash)
+
+        #         #         enemies.remove(enemy)
+        #         #         enemy.boss_max_health = 100
+        #         #         player.health -= 100
+        #         #     else:
+        #         #         enemy.boss_max_health -= 5
+        #         #         player.health -= 100
+        #         #         # player death explosion
+        #         #         crash = Explosion(player.x, player.y)
+        #         #         explosion_group.add(crash)
+        #         # else:
+        #         #     player.health -= 10
+        #         #     crash = Explosion(enemy.x, enemy.y)
+        #         #     explosion_group.add(crash)
+        #         #     enemies.remove(enemy)
+        #     elif heal.y + heal.get_height()/2 > config.HEIGHT:
+        #         lives += 1
+        #         enemies.remove(heal)
+
+        # player2.move_lasers(-laser_vel, heals)
+
 
 def paused(player, isMouse):
     main_font = pygame.font.Font(Font.edit_undo_font, 60)
@@ -610,6 +726,8 @@ def paused(player, isMouse):
                         player.run = False
                         unpause()
                         audio_cfg.play_music(Path.MENU_MUSIC_PATH)
+                        from main import main
+                        main()
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:
@@ -631,5 +749,6 @@ def paused(player, isMouse):
 def unpause():
     global pause
     pause = False
-    from main import main
-    main()
+    # audio_cfg.play_music(Path.PROLOGUE_MUSIC_PATH)
+    # from main import main
+    # main()
