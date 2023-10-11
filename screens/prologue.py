@@ -36,9 +36,12 @@ def prologoue():
                           (config.center_x + 140, 92), True)
         
         # CutScene Pertama
-        Assets.image.draw(Image.GOTG, (config.center_x + 50, 210), True)
-        Assets.text.draw('Easy Spaceship', ships_info_font, Colors.BLUE,
-                         (config.center_x + 50, 475))
+        Assets.image.draw(Image.GOTG, (config.center_x + 50, 110), True)
+        Assets.text.draw('"Guardian of the Galaxy: Pilot a fearless spaceship through ', ships_info_font, Colors.WHITE,
+                         (config.center_x + -300, 475))
+        Assets.text.draw('treacherous galaxies, defending humanity from alien threats."', ships_info_font, Colors.WHITE,
+                         (config.center_x + -300, 500))
+        
 
         go_back_btn.draw((config.starting_x + 65, 50), True, True)
 
