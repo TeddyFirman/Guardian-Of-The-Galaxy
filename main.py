@@ -32,7 +32,7 @@ pygame.display.set_icon(Image.PLAYER_SPACE_SHIP)
 
 
 def main():
-    title_font = pygame.font.Font(Font.edit_undo_font, 82)
+    title_font = pygame.font.Font(Font.edit_undo_font, 40)
 
     audio_cfg.play_music(Path.MENU_MUSIC_PATH)
 
@@ -55,7 +55,6 @@ def main():
 
         # Ships
         Assets.image.draw(Image.BOSS_SHIP, (config.center_x, 110), True)
-        Assets.image.draw(Image.FLAME_LASER, (config.center_x, 360), True)
         Assets.image.draw(Image.PLAYER_SPACE_SHIP, (config.center_x-46, 575))
         Assets.image.draw(Image.PLAYER_LASER, (config.center_x, 490), True)
 

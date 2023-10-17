@@ -30,13 +30,11 @@ def prologoue():
         slow_bg_obj.update()
         slow_bg_obj.render()
 
-        Assets.text.draw(Text.PROLOGUE, ships_title_font, Colors.CYAN,
+        Assets.text.draw(Text.PROLOGUE, ships_title_font, Colors.WHITE,
                          (config.center_x, 100), True, False, True)
-        Assets.image.draw(Image.STARLORD,
-                          (config.center_x + 140, 92), True)
         
         # CutScene Pertama
-        Assets.image.draw(Image.GOTG, (config.center_x + 50, 110), True)
+        Assets.image.draw(Image.GOTG, (config.center_x + 0, 110), True)
         Assets.text.draw('"Guardian of the Galaxy: Pilot a fearless spaceship through ', ships_info_font, Colors.WHITE,
                          (config.center_x + -300, 475))
         Assets.text.draw('treacherous galaxies, defending humanity from alien threats."', ships_info_font, Colors.WHITE,
