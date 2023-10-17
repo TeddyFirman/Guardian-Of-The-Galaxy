@@ -12,6 +12,8 @@ from models.icon_button import IconButton
 from utils.collide import collide
 from utils.assets import Assets
 from .background import bg_obj
+# from main import main
+# from main import main
 
 from config import config
 from constants import Path, Image, Font, Colors
@@ -56,6 +58,14 @@ def game(isMouse=False):
     lost = False
     win = False
     boss_entry = True
+    enemies_entry = True
+    enemies_entry2 = True
+    enemies_entry3 = True
+    enemies_entry4 = True
+    enemies_entry5 = True
+    enemies_entry6 = True
+    enemies_entry7 = True
+    enemies_entry8 = True
 
     pause_btn = IconButton(Image.PAUSE_IMAGE)
 
@@ -111,17 +121,63 @@ def game(isMouse=False):
             kills_label, (config.ending_x - kills_label.get_width() - 30, 75))
 
         if win:
-            scores.append(True, player.get_level(), player.get_score(), player.get_kills())
             Assets.text.draw('WINNER :)', pop_up_font, Colors.GREEN,
                              (config.center_x, 350), True)
+            pygame.display.update()
+            time.sleep(5)
+            scores.append(True, player.get_level(), player.get_score(), player.get_kills())
+            from main import main
+            main()
 
         if lost:
-            scores.append(False, player.get_level(), player.get_score(), player.get_kills())
-            Assets.text.draw('GAME OVER :(', pop_up_font, Colors.RED,
-                             (config.center_x, 350), True)
+            # scores.append(False, player.get_level(), player.get_score(), player.get_kills())
+            # Assets.text.draw('GAME OVER :(', pop_up_font, Colors.RED,
+            #                  (config.center_x, 350), True)
+            # # time.sleep(5)
+            # # from main import main
+            # # main()
+
+                Assets.text.draw('GAME OVER :(', pop_up_font, Colors.RED, (config.center_x, 350), True)
+                pygame.display.update()  # Memastikan perbaruan tampilan dilakukan
+                time.sleep(5)
+                scores.append(False, player.get_level(), player.get_score(), player.get_kills())
+                from main import main
+                main()
 
         if player.get_level() >= 10 and boss_entry:
             Assets.text.draw('BOSS LEVEL!!', pop_up_font, Colors.RED,
+                             (config.center_x, 350), True)
+            
+        if player.get_level() == 2 and enemies_entry:
+            Assets.text.draw('LEVEL 2!!', pop_up_font, Colors.RED,
+                             (config.center_x, 350), True)
+            
+        if player.get_level() == 3 and enemies_entry2:
+            Assets.text.draw('LEVEL 3!!', pop_up_font, Colors.RED,
+                             (config.center_x, 350), True)
+            
+        if player.get_level() == 4 and enemies_entry3:
+            Assets.text.draw('LEVEL 4!!', pop_up_font, Colors.RED,
+                             (config.center_x, 350), True)
+            
+        if player.get_level() == 5 and enemies_entry4:
+            Assets.text.draw('LEVEL 5!!', pop_up_font, Colors.RED,
+                             (config.center_x, 350), True)
+            
+        if player.get_level() == 6 and enemies_entry5:
+            Assets.text.draw('LEVEL 6!!', pop_up_font, Colors.RED,
+                             (config.center_x, 350), True)
+            
+        if player.get_level() == 7 and enemies_entry6:
+            Assets.text.draw('LEVEL 7!!', pop_up_font, Colors.RED,
+                             (config.center_x, 350), True)
+            
+        if player.get_level() == 8 and enemies_entry7:
+            Assets.text.draw('LEVEL 8!!', pop_up_font, Colors.RED,
+                             (config.center_x, 350), True)
+            
+        if player.get_level() == 9 and enemies_entry8:
+            Assets.text.draw('LEVEL 9!!', pop_up_font, Colors.RED,
                              (config.center_x, 350), True)
 
         # explosion group
@@ -149,6 +205,86 @@ def game(isMouse=False):
             redraw_window()
             time.sleep(2)
             boss_entry = False
+        elif player.get_level() > 10:
+            win = True
+            redraw_window()
+            time.sleep(3)
+            player.run = False
+
+        if player.get_level() == 2 and enemies_entry:
+            redraw_window()
+            time.sleep(2)
+            enemies_entry = False
+        elif player.get_level() > 10:
+            win = True
+            redraw_window()
+            time.sleep(3)
+            player.run = False
+
+        if player.get_level() == 3 and enemies_entry2:
+            redraw_window()
+            time.sleep(2)
+            enemies_entry2 = False
+        elif player.get_level() > 10:
+            win = True
+            redraw_window()
+            time.sleep(3)
+            player.run = False
+
+        if player.get_level() == 4 and enemies_entry3:
+            redraw_window()
+            time.sleep(2)
+            enemies_entry3 = False
+        elif player.get_level() > 10:
+            win = True
+            redraw_window()
+            time.sleep(3)
+            player.run = False
+
+        if player.get_level() == 5 and enemies_entry4:
+            redraw_window()
+            time.sleep(2)
+            enemies_entry4 = False
+        elif player.get_level() > 10:
+            win = True
+            redraw_window()
+            time.sleep(3)
+            player.run = False
+
+        if player.get_level() == 6 and enemies_entry5:
+            redraw_window()
+            time.sleep(2)
+            enemies_entry5 = False
+        elif player.get_level() > 10:
+            win = True
+            redraw_window()
+            time.sleep(3)
+            player.run = False
+
+        if player.get_level() == 7 and enemies_entry6:
+            redraw_window()
+            time.sleep(2)
+            enemies_entry6 = False
+        elif player.get_level() > 10:
+            win = True
+            redraw_window()
+            time.sleep(3)
+            player.run = False
+
+        if player.get_level() == 8 and enemies_entry7:
+            redraw_window()
+            time.sleep(2)
+            enemies_entry7 = False
+        elif player.get_level() > 10:
+            win = True
+            redraw_window()
+            time.sleep(3)
+            player.run = False
+
+        if player.get_level() == 9 and enemies_entry8:
+            redraw_window()
+            time.sleep(2)
+            enemies_entry8 = False
         elif player.get_level() > 10:
             win = True
             redraw_window()
@@ -389,6 +525,14 @@ def game2(isMouse=False):
     lost = False
     win = False
     boss_entry = True
+    enemies_entry = True
+    enemies_entry2 = True
+    enemies_entry3 = True
+    enemies_entry4 = True
+    enemies_entry5 = True
+    enemies_entry6 = True
+    enemies_entry7 = True
+    enemies_entry8 = True
 
     pause_btn = IconButton(Image.PAUSE_IMAGE)
 
@@ -444,14 +588,22 @@ def game2(isMouse=False):
             kills_label, (config.ending_x - kills_label.get_width() - 30, 75))
 
         if win:
-            scores.append(True, player2.get_level(), player2.get_score(), player2.get_kills())
             Assets.text.draw('WINNER :)', pop_up_font, Colors.GREEN,
-                             (config.center_x, 350), True)
+                             (config.center_x, 350), True)   
+            pygame.display.update()
+            time.sleep(5)
+            scores.append(True, player2.get_level(), player2.get_score(), player2.get_kills())
+            from main import main
+            main()
 
         if lost:
-            scores.append(False, player2.get_level(), player2.get_score(), player2.get_kills())
             Assets.text.draw('GAME OVER :(', pop_up_font, Colors.RED,
                              (config.center_x, 350), True)
+            pygame.display.update()
+            time.sleep(5)
+            scores.append(False, player2.get_level(), player2.get_score(), player2.get_kills())
+            from main import main
+            main()
 
         if player2.get_level() >= 10 and boss_entry:
             Assets.text.draw('BOSS LEVEL!!', pop_up_font, Colors.RED,
@@ -482,6 +634,86 @@ def game2(isMouse=False):
             redraw_window()
             time.sleep(2)
             boss_entry = False
+        elif player2.get_level() > 10:
+            win = True
+            redraw_window()
+            time.sleep(3)
+            player2.run = False
+
+        if player2.get_level() == 2 and enemies_entry:
+            redraw_window()
+            time.sleep(2)
+            enemies_entry = False
+        elif player2.get_level() > 10:
+            win = True
+            redraw_window()
+            time.sleep(3)
+            player2.run = False
+
+        if player2.get_level() == 3 and enemies_entry2:
+            redraw_window()
+            time.sleep(2)
+            enemies_entry2 = False
+        elif player2.get_level() > 10:
+            win = True
+            redraw_window()
+            time.sleep(3)
+            player2.run = False
+
+        if player2.get_level() == 4 and enemies_entry3:
+            redraw_window()
+            time.sleep(2)
+            enemies_entry3 = False
+        elif player2.get_level() > 10:
+            win = True
+            redraw_window()
+            time.sleep(3)
+            player2.run = False
+
+        if player2.get_level() == 5 and enemies_entry4:
+            redraw_window()
+            time.sleep(2)
+            enemies_entry4 = False
+        elif player2.get_level() > 10:
+            win = True
+            redraw_window()
+            time.sleep(3)
+            player2.run = False
+
+        if player2.get_level() == 6 and enemies_entry5:
+            redraw_window()
+            time.sleep(2)
+            enemies_entry5 = False
+        elif player2.get_level() > 10:
+            win = True
+            redraw_window()
+            time.sleep(3)
+            player2.run = False
+
+        if player2.get_level() == 7 and enemies_entry6:
+            redraw_window()
+            time.sleep(2)
+            enemies_entry6 = False
+        elif player2.get_level() > 10:
+            win = True
+            redraw_window()
+            time.sleep(3)
+            player2.run = False
+
+        if player2.get_level() == 8 and enemies_entry7:
+            redraw_window()
+            time.sleep(2)
+            enemies_entry7 = False
+        elif player2.get_level() > 10:
+            win = True
+            redraw_window()
+            time.sleep(3)
+            player2.run = False
+
+        if player2.get_level() == 9 and enemies_entry8:
+            redraw_window()
+            time.sleep(2)
+            enemies_entry8 = False
         elif player2.get_level() > 10:
             win = True
             redraw_window()
