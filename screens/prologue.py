@@ -19,8 +19,8 @@ def prologoue():
 
     go_back_btn = IconButton(Image.GO_BACK_IMAGE)
     mouse_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE, "MOUSE")
-    keyboard_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE, "Plane1")
-    keyboard2_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE, "Plane2")
+    keyboard_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE, "Plane 1")
+    keyboard2_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE, "Plane 2")
 
     NEW_HEART_IMAGE = pygame.transform.scale(
         Image.HEART_IMAGE, (Image.HEART_IMAGE.get_width()*3/4, Image.HEART_IMAGE.get_height()*3/4))
@@ -30,13 +30,11 @@ def prologoue():
         slow_bg_obj.update()
         slow_bg_obj.render()
 
-        Assets.text.draw('PROLOGUE', ships_title_font, Colors.WHITE,
-                         (config.center_x, 100), True, False, True)
         
         # CutScene Pertama
-        Assets.image.draw(Image.GOTG, (config.center_x + 0, 110), True)
+        Assets.image.draw(Image.GOTG, (config.center_x + 0, 80), True)
         Assets.text.draw('"Guardian of the Galaxy: Pilot a fearless spaceship through ', ships_info_font, Colors.WHITE,
-                         (config.center_x + -300, 475))
+                         (config.center_x + -300, 455))
         Assets.text.draw('treacherous galaxies, defending humanity from alien threats."', ships_info_font, Colors.WHITE,
                          (config.center_x + -300, 500))
         
@@ -47,13 +45,11 @@ def prologoue():
         #     (config.center_x - 210, config.center_y + 42), (195, 66))
         
         keyboard_btn.draw(
-            (config.center_x - 210, config.center_y + 192), (205, 66))
-        Assets.image.draw(Image.PLAYER_SPACE_SHIP_PRO,
-                          (config.center_x - 30, config.center_y + 198), True)
+            (config.center_x - 210, config.center_y + 192), (185, 60))
+        
         keyboard2_btn.draw(
-            (config.center_x + 25, config.center_y + 192), (205, 66))
-        Assets.image.draw(Image.PLAYER2_SPACE_SHIP_PRO,
-                          (config.center_x + 210, config.center_y + 198), True)
+            (config.center_x + 25, config.center_y + 192), (185, 60))
+        
 
         audio_cfg.display_volume()
         config.clock.tick(config.FPS)

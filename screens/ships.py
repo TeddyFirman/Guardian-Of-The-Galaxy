@@ -23,55 +23,63 @@ def ships():
         slow_bg_obj.update()
         slow_bg_obj.render()
 
-        Assets.text.draw(Text.SHIPS, ships_title_font, Colors.CYAN,
-                         (config.center_x, 100), True, False, True)
-        Assets.image.draw(Image.SHIPS_IMAGE,
-                          (config.center_x - 110, 90), True)
-        Assets.image.draw(Image.SHIPS_IMAGE_2,
-                          (config.center_x + 110, 99), True)
+    
 
         # Name: Easy Spaceship; Health: 100; Damage: 10;
         Assets.image.draw(Image.EASY_SPACE_SHIP,
-                          (config.center_x - 270, 210), True)
+                          (config.center_x - 270, 110), True)
         Assets.text.draw('Easy Spaceship', ships_info_font, Colors.BLUE,
-                         (config.center_x - 210, 195))
+                         (config.center_x - 210, 95))
         Assets.text.draw('Health: 100', ships_info_font,
-                         Colors.GREEN, (config.center_x - 210, 222))
+                         Colors.GREEN, (config.center_x - 210, 122))
         Assets.text.draw('Damage: 10', ships_info_font,
-                         Colors.RED, (config.center_x - 210, 249))
+                         Colors.RED, (config.center_x - 210, 149))
 
         # Name: Medium Spaceship; Health: 100; Damage: 18;
         Assets.image.draw(Image.MEDIUM_SPACE_SHIP,
-                          (config.center_x - 270, 295), True)
+                          (config.center_x - 270, 235), True)
         Assets.text.draw('Medium Spaceship', ships_info_font, Colors.BLUE,
-                         (config.center_x - 210, 290))
+                         (config.center_x - 210, 230))
         Assets.text.draw('Health: 100', ships_info_font,
-                         Colors.GREEN, (config.center_x - 210, 317))
+                         Colors.GREEN, (config.center_x - 210, 257))
         Assets.text.draw('Damage: 18', ships_info_font,
-                         Colors.RED, (config.center_x - 210, 344))
+                         Colors.RED, (config.center_x - 210, 284))
 
         # Name: Hard Spaceship; Health: 100; Damage: 25;
         Assets.image.draw(Image.HARD_SPACE_SHIP,
-                          (config.center_x - 270, 420), True)
+                          (config.center_x - 270, 390), True)
         Assets.text.draw('Hard Spaceship', ships_info_font, Colors.BLUE,
-                         (config.center_x - 210, 400))
+                         (config.center_x - 210, 370))
         Assets.text.draw('Health: 100', ships_info_font,
-                         Colors.GREEN, (config.center_x - 210, 427))
+                         Colors.GREEN, (config.center_x - 210, 397))
         Assets.text.draw('Damage: 25', ships_info_font,
-                         Colors.RED, (config.center_x - 210, 454))
+                         Colors.RED, (config.center_x - 210, 424))
 
         # Name: Your Spaceship; Lives: 5; Health: 100; Damage: 100
         Assets.image.draw(Image.PLAYER_SPACE_SHIP,
-                          (config.center_x + 260, 270), True)
-        Assets.text.draw('Your Spaceship', ships_info_font, Colors.BLUE,
-                         (config.center_x + 70, 265))
+                          (config.center_x + 260, 110), True)
+        Assets.text.draw('Your Spaceship 1', ships_info_font, Colors.BLUE,
+                         (config.center_x + 70, 105))
         for index in range(1, 6):
             Assets.image.draw(
-                NEW_HEART_IMAGE, (config.center_x + 45 + 25 * index, 292))
+                NEW_HEART_IMAGE, (config.center_x + 45 + 25 * index, 132))
         Assets.text.draw('Health: 100', ships_info_font,
-                         Colors.GREEN, (config.center_x + 70, 319))
+                         Colors.GREEN, (config.center_x + 70, 159))
         Assets.text.draw('Damage: 100', ships_info_font,
-                         Colors.RED, (config.center_x + 70, 346))
+                         Colors.RED, (config.center_x + 70, 186))
+        
+
+        Assets.image.draw(Image.PLAYER2_SPACE_SHIP,
+                          (config.center_x + 260, 300), True)
+        Assets.text.draw('Your Spaceship 2', ships_info_font, Colors.BLUE,
+                         (config.center_x + 70, 295))
+        for index in range(1, 6):
+            Assets.image.draw(
+                NEW_HEART_IMAGE, (config.center_x + 45 + 25 * index, 322))
+        Assets.text.draw('Health: 100', ships_info_font,
+                         Colors.GREEN, (config.center_x + 70, 349))
+        Assets.text.draw('Damage: 100', ships_info_font,
+                         Colors.RED, (config.center_x + 70, 376))
         
         # # Name: Hard Spaceship; Health: 100; Damage: 25;
         # Assets.image.draw(Image.EASY_OBSTACLE,
