@@ -30,7 +30,7 @@ def prologoue():
         slow_bg_obj.update()
         slow_bg_obj.render()
 
-        Assets.text.draw(Text.PROLOGUE, ships_title_font, Colors.WHITE,
+        Assets.text.draw('PROLOGUE', ships_title_font, Colors.WHITE,
                          (config.center_x, 100), True, False, True)
         
         # CutScene Pertama
