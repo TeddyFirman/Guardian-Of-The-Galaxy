@@ -1,11 +1,11 @@
-# Guardian Of The Galaxy 	:flying_saucer: :globe_with_meridians: 👾
+# Guardian Of The Galaxy :flying_saucer: :globe_with_meridians: 👾2
 
 <!-- ;; This project comes under an open-source gaming organization called [Amegma](https://github.com/Amegma), and it is an inspiration of an arcade game which was Atari Space Invaders -->
 
 <h2>This project is developed by:</h2>
 Developer: https://github.com/TeddyFirman
 <br>
-Assets: https://www.instagram.com/adrian_bgsp/ 
+Assets: https://www.instagram.com/adrian_bgsp/
 
 <br>[Demo Game Video](https://youtu.be/ejA89NtTH2k)
 
@@ -23,11 +23,13 @@ Assets: https://www.instagram.com/adrian_bgsp/
 - Pygame should be installed: `Pygame version > 1.9.5`
 
 ### Run the game
+
 ```
 python <file_path>/main.py
 ```
 
 ### Create a release
+
 ```
 pyinstaller.exe .\main.spec --onefile --noconsole
 ```
@@ -36,9 +38,9 @@ pyinstaller.exe .\main.spec --onefile --noconsole
 
 #### IMAGES:
 
-<img src="/images/home.png" width=340px /> &nbsp;&nbsp;  <img src="/images/scoreboard2.png" width=340px />
+<img src="/images/home.png" width=340px /> &nbsp;&nbsp; <img src="/images/scoreboard2.png" width=340px />
 
-<img src="/images/settings1.png" width=340px />  &nbsp;&nbsp; <img src="/images/settings2.png" width=340px />
+<img src="/images/settings1.png" width=340px /> &nbsp;&nbsp; <img src="/images/settings2.png" width=340px />
 
 <img src="/images/settings3.png" width=340px /> &nbsp;&nbsp; <img src="/images/settings4.png" width=340px />
 
