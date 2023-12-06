@@ -8,7 +8,7 @@ from utils.assets import Assets
 from config import config
 from constants import Image, Font, Colors, Text, Path
 from models.button import Button
-from screens.game import game
+from screens.game import game, game2
 
 
 def prologoue():
@@ -19,7 +19,8 @@ def prologoue():
 
     go_back_btn = IconButton(Image.GO_BACK_IMAGE)
     mouse_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE, "MOUSE")
-    keyboard_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE, "MULAI")
+    keyboard_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE, "Plane1")
+    keyboard2_btn = Button(Colors.BACKGROUND_BLACK, Colors.WHITE, "Plane2")
 
     NEW_HEART_IMAGE = pygame.transform.scale(
         Image.HEART_IMAGE, (Image.HEART_IMAGE.get_width()*3/4, Image.HEART_IMAGE.get_height()*3/4))
@@ -41,10 +42,17 @@ def prologoue():
 
         go_back_btn.draw((config.starting_x + 65, 50), True, True)
 
-        mouse_btn.draw(
-            (config.center_x - 210, config.center_y + 42), (195, 66))
+        # mouse_btn.draw(
+        #     (config.center_x - 210, config.center_y + 42), (195, 66))
+        
         keyboard_btn.draw(
-            (config.center_x + 15, config.center_y + 42), (195, 66))
+            (config.center_x - 210, config.center_y + 192), (205, 66))
+        Assets.image.draw(Image.PLAYER_SPACE_SHIP_PRO,
+                          (config.center_x - 30, config.center_y + 198), True)
+        keyboard2_btn.draw(
+            (config.center_x + 25, config.center_y + 192), (205, 66))
+        Assets.image.draw(Image.PLAYER2_SPACE_SHIP_PRO,
+                          (config.center_x + 210, config.center_y + 198), True)
 
         audio_cfg.display_volume()
         config.clock.tick(config.FPS)
@@ -78,10 +86,13 @@ def prologoue():
                 if event.button == 1:
                     if go_back_btn.isOver():
                         run = False
-                    if mouse_btn.isOver():
-                        game(True)
+                        audio_cfg.play_music(Path.MENU_MUSIC_PATH)
+                    # if mouse_btn.isOver():
+                    #     game(True)
                     if keyboard_btn.isOver():
                         game()
+                    if keyboard2_btn.isOver():
+                        game2()
 
             # Mouse hover events
             if event.type == pygame.MOUSEMOTION:
@@ -89,13 +100,19 @@ def prologoue():
                     go_back_btn.outline = True
                 else:
                     go_back_btn.outline = False
+                    
 
-                if mouse_btn.isOver():
-                    mouse_btn.outline = True
-                else:
-                    mouse_btn.outline = False
+                # if mouse_btn.isOver():
+                #     mouse_btn.outline = True
+                # else:
+                #     mouse_btn.outline = False
 
                 if keyboard_btn.isOver():
                     keyboard_btn.outline = True
                 else:
                     keyboard_btn.outline = False
+
+                if keyboard2_btn.isOver():
+                    keyboard2_btn.outline = True
+                else:
+                    keyboard2_btn.outline = False

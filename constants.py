@@ -47,6 +47,9 @@ class Image:
     HARD_OBSTACLE = Assets.image.load(Path.GRAPHICS_PATH, 'meteor.png')
     OBSTACLE = Assets.image.load(Path.GRAPHICS_PATH, 'meteor_edit.png')
 
+    # Heal
+    EASY_HEAL = Assets.image.load(Path.GRAPHICS_PATH, 'easyHeal.png')
+
     # Prologue
     STARLORD = Assets.image.load(Path.GRAPHICS_PATH, 'starlord.png')
     GOTG = Assets.image.load(Path.GRAPHICS_PATH, 'gotg.png')
@@ -56,6 +59,12 @@ class Image:
     # Load Player
     PLAYER_SPACE_SHIP = Assets.image.load(
         Path.GRAPHICS_PATH, 'retro-spaceship.png')
+    PLAYER_SPACE_SHIP_PRO = Assets.image.load(
+        Path.GRAPHICS_PATH, 'retro-spaceship_prologue.png')
+    PLAYER2_SPACE_SHIP_PRO = Assets.image.load(
+        Path.GRAPHICS_PATH, 'retro-spaceship2ed_pro.png')
+    PLAYER2_SPACE_SHIP = Assets.image.load(
+        Path.GRAPHICS_PATH, 'retro-spaceship2ed.png')
     PLAYER_LASER = Assets.image.load(
         Path.GRAPHICS_PATH, 'pixel_laser_cosmic.png')
 
